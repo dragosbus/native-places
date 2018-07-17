@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -16,14 +16,18 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <TextInput
+          style={styles.inp}
+          placeholder="Name"
+        />
+        <TouchableOpacity style={styles.btn}>
+          <Text style={styles.btnText}>Login</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -36,14 +40,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  inp: {
+    width: 390,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'rgba(2,2,2,0.3)',
+    borderRadius: 5,
+    marginBottom: 20
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  btn: {
+    width: 120,
+    backgroundColor: '#313B72',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 5
   },
+  btnText: {
+    color: '#fff',
+    fontSize: 16
+  }
 });
