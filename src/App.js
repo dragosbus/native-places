@@ -15,6 +15,7 @@ export default class App extends Component {
     };
     this.changeInp = this.changeInp.bind(this);
     this.placesSubmitHandler = this.placesSubmitHandler.bind(this);
+    this.onItemDelete = this.onItemDelete.bind(this);
   }
 
   changeInp(e) {
@@ -33,6 +34,16 @@ export default class App extends Component {
     });
   }
 
+  onItemDelete(index) {
+    this.setState(prevState=>{
+      return {
+        places: prevState.places.filter((place, i)=>{
+          return i !== index;
+        })
+      }
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -41,7 +52,7 @@ export default class App extends Component {
           changeInp={this.changeInp}
         />
         <AddPlace placeSubmit={this.placesSubmitHandler}/>
-        <Places places={this.state.places}/>
+        <Places places={this.state.places} onItemDelete={this.onItemDelete}/>
       </View>
     );
   }

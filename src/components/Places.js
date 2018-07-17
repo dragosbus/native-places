@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import ListItem from './ListItem';
 
 const Places = props => {
-  return <View style={styles.places}>{props.places.map((place, i) => <ListItem key={i} placeName={place} />)}</View>;
+  return <View style={styles.places}>{props.places.map((place, i) => <ListItem key={i} placeName={place} onItemPressed={()=>props.onItemDelete(i)}/>)}</View>;
 };
 
 const styles = StyleSheet.create({
