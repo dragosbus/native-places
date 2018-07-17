@@ -18,16 +18,51 @@ const instructions = Platform.select({
 
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      placeName: '',
+      places: []
+    };
+    this.changeInp = this.changeInp.bind(this);
+    this.placesSubmitHandler = this.placesSubmitHandler.bind(this);
+  }
+
+  changeInp(e) {
+    this.setState({
+      placeName: e
+    });
+  }
+
+  placesSubmitHandler() {
+    if(!this.state.placeName) return;
+    
+    this.setState(prevState=>{
+      return {
+        places: prevState.places.concat(prevState.placeName)
+      }
+    });
+  }
+
   render() {
+    const placesOutput = this.state.places.map((place, i)=>(
+      <Text key={i}>{place}</Text>
+    ));
+
     return (
       <View style={styles.container}>
         <TextInput
           style={styles.inp}
           placeholder="Name"
+          value={this.state.placeName}
+          onChangeText={this.changeInp}
         />
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>Login</Text>
+        <TouchableOpacity style={styles.btn} onPress={this.placesSubmitHandler}>
+          <Text style={styles.btnText}>Add Place</Text>
         </TouchableOpacity>
+        <View>
+          {placesOutput}
+        </View>
       </View>
     );
   }
@@ -36,16 +71,17 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   inp: {
-    width: 390,
+    width: "80%",
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'rgba(2,2,2,0.3)',
     borderRadius: 5,
+    marginTop: 20,
     marginBottom: 20
   },
   btn: {
